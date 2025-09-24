@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
 class HoroscopeAdapter(val items: List<Horoscope>) : RecyclerView.Adapter<HoroscopeViewHolder>()
@@ -47,5 +48,13 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         ivItemImage.setImageResource(horoscope.icon)
         tvItemName.setText(horoscope.name)
         tvItemDates.setText(horoscope.dates)
+    }
+
+    //
+    init {
+        view.setOnClickListener { v: View->
+            val position: Int = adapterPosition
+            Toast.makeText(view.context,"${position} probando", Toast.LENGTH_SHORT).show()
+        }
     }
 }
