@@ -1,4 +1,4 @@
-package com.example.horoscopo_android
+package com.example.horoscopo_android.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.horoscopo_android.data.Horoscope
+import com.example.horoscopo_android.R
 
-class HoroscopeAdapter(val items: List<Horoscope>) : RecyclerView.Adapter<HoroscopeViewHolder>()
+class HoroscopeAdapter(val items: List<Horoscope>, val onClickListener: (Int)-> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
     //CUAL ES LA LISTA PARA LOS ELEMENTOS
     override fun onCreateViewHolder(
@@ -27,6 +29,9 @@ class HoroscopeAdapter(val items: List<Horoscope>) : RecyclerView.Adapter<Horosc
     ) {
         val item = items[position]
         holder.render(item)
+
+        //LLAMAMOS A LA FUNCION LAMDA DECLARADA EN EL COMNSTRUCTOR
+        holder.itemView.setOnClickListener { onClickListener(position) }
     }
 
     //ELEMENTOS QUE SE QUIEREN LISTAR
@@ -53,8 +58,10 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
     //
     init {
         view.setOnClickListener { v: View->
-            val position: Int = adapterPosition
+            val position: Int = layoutPosition
             Toast.makeText(view.context,"${position} probando", Toast.LENGTH_SHORT).show()
+
+
         }
     }
 }
