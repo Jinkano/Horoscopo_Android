@@ -10,13 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo_android.data.Horoscope
 import com.example.horoscopo_android.R
 
-class HoroscopeAdapter(val items: List<Horoscope>, val onClickListener: (Int)-> Unit) : RecyclerView.Adapter<HoroscopeViewHolder>()
+class HoroscopeAdapter(val items: List<Horoscope>,
+                       val onClickListener: (Int)-> Unit
+                    ) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
     //CUAL ES LA LISTA PARA LOS ELEMENTOS
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): HoroscopeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup,
+                                    viewType: Int
+                                ): HoroscopeViewHolder
+    {
         //
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope,parent,false)
         return HoroscopeViewHolder(view)

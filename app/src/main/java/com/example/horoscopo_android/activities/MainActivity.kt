@@ -2,9 +2,13 @@ package com.example.horoscopo_android.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,28 +35,65 @@ class MainActivity : AppCompatActivity()
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-        //INICIO ONCREATE
+        }//INICIO ONCREATE
 
         rvListHoroscope = findViewById(R.id.idRvListHoroscope)
 
-        val adapter = HoroscopeAdapter(horoscopeList,{ it ->
+        val adapter = HoroscopeAdapter(horoscopeList,::onClickListener)
+        /*
+        * SE PUEDE HACER USO DE LA FUNCION LAMDA DE ESTAS DOS MANERAS
+        *
+        * LA PRIMERA : val adapter = HoroscopeAdapter(horoscopeList,::onClickListener)
+        * EN EL PRIMER CASO SE USAN DOS FUNCIONES, LLAMA A LA FUNCIÓN onClickListener QUE A SU VEZ
+        * LLAMA A LA FUNCIÓN goToDetail
+        *
+        * LA SEGUNDA : val adapter = HoroscopeAdapter(horoscopeList,{ it ->
             val horoscope = horoscopeList[it]
             goToDetail(horoscope)
-        })//IT ES POR DEFECTO DE LA FUNCION LAMDA se puede renombrar por una variable
+        })//IT ES POR DEFECTO DE LA FUNCION LAMDA, SE PUEDE */
 
         rvListHoroscope.adapter = adapter
         rvListHoroscope.layoutManager  = LinearLayoutManager(this)//, LinearLayoutManager.VERTICAL,false)
 
-        /*
-        *
-        val botoncito = findViewById<Button>(R.id.button)
-        botoncito.setOnClickListener { goToDetail() }
-        * */
-        //botoncito.setOnClickListener { goToDetail() }
+    }//FIN ONCREATE
 
-    //FIN ONCREATE
+    //
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean
+    {
+        menuInflater.inflate(R.menu.activity_main_menu,menu)
+
+        val searchView = menu!!.findItem(R.id.idMnSearch).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+
+            //consejo : cuando esta en internet
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                //consejo : cuando estan en el telefono
+                //TODO : buscar en la lista
+                return true
+            }
+
+        })
+        //
+        return true//super.onCreateOptionsMenu(menu)
     }
+
+    //
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        return when (item.itemId) {
+            R.id.idMnSearch -> {
+                Toast.makeText(this,"BUSCAR", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            else -> {super.onOptionsItemSelected(item)}
+        }
+    }
+
 
     //
     fun goToDetail(horoscope: Horoscope)
@@ -60,6 +101,13 @@ class MainActivity : AppCompatActivity()
         val intent = Intent(this, DailyHoroscope::class.java)
         intent.putExtra("HOROSCOPE_ID",horoscope.id)
         startActivity(intent)
+    }
+
+    //
+    fun onClickListener(position: Int)
+    {
+        val horoscope=horoscopeList[position]
+        goToDetail(horoscope)
     }
 
 }

@@ -26,4 +26,7 @@
     <string name="txt_date_capricorn">22 de diciembre al 19 de enero</string>
     <string name="txt_date_aquarius">20 de enero al 18 de febrero</string>
     <string name="txt_date_pisces">19 de febrero al 20 de marzo</string>
+    <string name="txt_mn_search">Buscar</string>
+    <string name="txt_mn_favorite">Favorito</string>
+    <string name="txt_mn_share">Compartir</string>
 </resources>

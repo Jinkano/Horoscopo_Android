@@ -1,14 +1,18 @@
 package com.example.horoscopo_android.activities
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.horoscopo_android.R
 import com.example.horoscopo_android.data.Horoscope
+import kotlin.time.Duration
 
 class DailyHoroscope : AppCompatActivity()
 {
@@ -25,8 +29,13 @@ class DailyHoroscope : AppCompatActivity()
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-        //INICIO DEL ONCREATE
+        }//INICIO DEL ONCREATE
+
+        //PERSONALIZAR EL ACTIONBAR
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_launcher_foreground)
+        supportActionBar?.setTitle("hola")
+        supportActionBar?.setSubtitle("morr - hola")
 
         //ENLAZAMOS LOS ELEMENTOS CON LAS VARIABLES
         ivImage = findViewById(R.id.idIvImage)
@@ -44,7 +53,36 @@ class DailyHoroscope : AppCompatActivity()
         tvDates.setText(horoscope.dates)
         tvDailyHoroscope.setText(horoscope.name)
 
+    }//fin oncreate
 
-        //fin oncreate
+    //
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean
+    {
+        menuInflater.inflate(R.menu.activity_daily_horoscope_menu,menu)
+        return true//super.onCreateOptionsMenu(menu)
+    }
+
+
+    //
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        return when (item.itemId) {
+            R.id.idMnFavorite -> {
+                Toast.makeText(this,"FAVORITO", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            R.id.idMnShare -> {
+                Toast.makeText(this,"COMPARTIR", Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            android.R.id.home -> {
+                    finish()
+                    true
+                }
+
+            else -> {super.onOptionsItemSelected(item)}
+        }
     }
 }

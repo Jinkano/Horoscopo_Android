@@ -25,4 +25,7 @@
     <string name="txt_date_aries">March 21 to April 19</string>
     <string name="txt_date_aquarius">January 20 to February 18</string>
     <string name="txt_date_pisces">February 19 to March 20</string>
+    <string name="txt_mn_search">Search</string>
+    <string name="txt_mn_favorite">Favorite</string>
+    <string name="txt_mn_share">Share</string>
 </resources>

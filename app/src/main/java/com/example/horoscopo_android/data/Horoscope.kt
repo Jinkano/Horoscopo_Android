@@ -2,8 +2,12 @@ package com.example.horoscopo_android.data
 
 import com.example.horoscopo_android.R
 
-data class Horoscope (val id: String, val name: Int, val dates: Int, val icon: Int)
-{
+data class Horoscope (
+    val id: String,
+    val name: Int,
+    val dates: Int,
+    val icon: Int
+){
     companion object {
         //CREAMOS LA FUNCION PARA CREAR LA LISTA
         fun getAll() : List<Horoscope> {
@@ -23,7 +27,9 @@ data class Horoscope (val id: String, val name: Int, val dates: Int, val icon: I
             )
         }
 
-        //
+        /*
+        * LA FUNCION getById SIRVE PARA OBTENER LOS DATOS DEL ITEM SELECCIONADO
+        * */
         fun getById(id: String): Horoscope
         {
             return getAll().first{it.id == id}

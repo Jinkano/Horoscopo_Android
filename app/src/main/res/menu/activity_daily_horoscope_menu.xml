@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/idMnFavorite"
+        android:icon="@drawable/ic_mn_favorite_24"
+        android:title="@string/txt_mn_favorite"
+        app:showAsAction="ifRoom" />
+
+
+    <item
+        android:id="@+id/idMnShare"
+        android:icon="@drawable/ic_mn_share_24"
+        android:title="@string/txt_mn_share"
+        app:showAsAction="ifRoom" />
+</menu>
