@@ -9,22 +9,29 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo_android.data.Horoscope
 import com.example.horoscopo_android.R
+import com.example.horoscopo_android.utils.SessionManager
 
-class HoroscopeAdapter(val items: List<Horoscope>,
-                       val onClickListener: (Int)-> Unit
-                    ) : RecyclerView.Adapter<HoroscopeViewHolder>()
+class HoroscopeAdapter(
+    var items: List<Horoscope>,
+    val onClickListener: (Int)-> Unit
+) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
-    //CUAL ES LA LISTA PARA LOS ELEMENTOS
+    /*
+    * CUAL ES LA LISTA PARA LOS ELEMENTOS
+    * */
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int
                                 ): HoroscopeViewHolder
     {
         //
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope,parent,false)
+        //val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope_list,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope_grid,parent,false)
         return HoroscopeViewHolder(view)
     }
 
-    //CUALES SON LOS DATOS PARA EL ELEMENTO QUE ESTA EN LA POSICION
+    /*
+    * CUALES SON LOS DATOS PARA EL ELEMENTO QUE ESTA EN LA POSICION
+    * */
     override fun onBindViewHolder(
         holder: HoroscopeViewHolder,
         position: Int
@@ -40,6 +47,14 @@ class HoroscopeAdapter(val items: List<Horoscope>,
     override fun getItemCount(): Int {
         return items.size
     }
+
+    /*
+    * CREAMOS LA FUNCION updateItems QUE ACTUALIZARA LA LISTA CON LA BUSQUEDA
+    * */
+    fun updateItems(items: List<Horoscope>){
+        this.items = items
+        notifyDataSetChanged()
+    }
 }
 
 class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -48,6 +63,7 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
     val ivItemImage: ImageView = view.findViewById(R.id.idIvItemImage)
     val tvItemName: TextView = view.findViewById(R.id.idTvItemName)
     val tvItemDates: TextView = view.findViewById(R.id.idTvItemDates)
+    val ivItemFavorite: ImageView = view.findViewById(R.id.idIvItemFavorite)
 
     //
     fun render(horoscope: Horoscope)
@@ -55,6 +71,15 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         ivItemImage.setImageResource(horoscope.icon)
         tvItemName.setText(horoscope.name)
         tvItemDates.setText(horoscope.dates)
+        //ivItemFavorite.setImageResource()
+
+        val session = SessionManager(itemView.context)
+        if (session.isFavorite(horoscope.id))
+        {
+            ivItemFavorite.visibility = View.VISIBLE
+        } else {
+            ivItemFavorite.visibility = View.GONE
+        }
     }
 
     //

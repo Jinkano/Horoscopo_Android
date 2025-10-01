@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="ic_menu_color">#FFFFFF</color>
+
     <color name="md_theme_primary">#A3D397</color>
     <color name="md_theme_onPrimary">#0E380D</color>
     <color name="md_theme_primaryContainer">#265022</color>

@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo_android.R
@@ -19,14 +19,18 @@ import com.example.horoscopo_android.data.Horoscope
 
 class MainActivity : AppCompatActivity()
 {
-    //
+    //VARIABLE PARA EL RECYCLERVIEW
     lateinit var rvListHoroscope: RecyclerView
 
-    //lateinit var botoncito : Button
+    //VARIABLE PARA EL ADAPTADOR DEL RECYCLERVIEW
+    lateinit var adapter: HoroscopeAdapter
 
-    //
-    val horoscopeList: List<Horoscope> = Horoscope.Companion.getAll()
+    //VARIABLE QUE RECIBE LA LISTA CON LOS HOROSCOPOS
+    var horoscopeList: List<Horoscope> = Horoscope.getAll()
 
+    /*
+    * INICIO DEL ONCREATE
+    * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,9 +41,11 @@ class MainActivity : AppCompatActivity()
             insets
         }//INICIO ONCREATE
 
+        //CAMBIAR EL TITULO DE LA APLICACION
+        supportActionBar?.setTitle(R.string.txt_title_activity_main)
         rvListHoroscope = findViewById(R.id.idRvListHoroscope)
 
-        val adapter = HoroscopeAdapter(horoscopeList,::onClickListener)
+        adapter = HoroscopeAdapter(horoscopeList,::onItemClickListener)
         /*
         * SE PUEDE HACER USO DE LA FUNCION LAMDA DE ESTAS DOS MANERAS
         *
@@ -53,9 +59,21 @@ class MainActivity : AppCompatActivity()
         })//IT ES POR DEFECTO DE LA FUNCION LAMDA, SE PUEDE */
 
         rvListHoroscope.adapter = adapter
-        rvListHoroscope.layoutManager  = LinearLayoutManager(this)//, LinearLayoutManager.VERTICAL,false)
+        //rvListHoroscope.layoutManager  = LinearLayoutManager(this)//, LinearLayoutManager.VERTICAL,false)
+        rvListHoroscope.layoutManager  = GridLayoutManager(this,2)
 
-    }//FIN ONCREATE
+    }
+    /*
+    * FIN ONCREATE
+    * */
+
+    /*
+    * actualizar los items de la lista
+    * */
+    override fun onResume() {
+        super.onResume()
+        adapter.updateItems(horoscopeList)
+    }
 
     //
     override fun onCreateOptionsMenu(menu: Menu?): Boolean
@@ -70,9 +88,20 @@ class MainActivity : AppCompatActivity()
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                //consejo : cuando estan en el telefono
-                //TODO : buscar en la lista
+            /*
+            * quitamos el ? de (newText: String?) para indicarle que
+            * */
+            override fun onQueryTextChange(newText: String): Boolean {
+                /*
+                * consejo : cuando estan en el telefono usar este metodo
+                * para buscar en la lista
+                * */
+                horoscopeList = Horoscope.getAll().filter {
+                    getString(it.name).contains(newText,true) ||
+                    getString(it.dates).contains(newText,true) }
+
+                //LLAMAMOS A LA FUNCION updateItems DEL ADAPTADOR HOROSCOPE ADAPTER
+                adapter.updateItems(horoscopeList)
                 return true
             }
 
@@ -86,6 +115,8 @@ class MainActivity : AppCompatActivity()
     {
         return when (item.itemId) {
             R.id.idMnSearch -> {
+                //
+
                 Toast.makeText(this,"BUSCAR", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -104,9 +135,9 @@ class MainActivity : AppCompatActivity()
     }
 
     //
-    fun onClickListener(position: Int)
+    fun onItemClickListener(position: Int)
     {
-        val horoscope=horoscopeList[position]
+        val horoscope = horoscopeList[position]
         goToDetail(horoscope)
     }
 

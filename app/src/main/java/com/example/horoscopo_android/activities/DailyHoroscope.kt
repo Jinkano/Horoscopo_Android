@@ -1,6 +1,7 @@
 package com.example.horoscopo_android.activities
 
 import android.os.Bundle
+import android.se.omapi.Session
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.horoscopo_android.R
 import com.example.horoscopo_android.data.Horoscope
+import com.example.horoscopo_android.utils.SessionManager
 import kotlin.time.Duration
 
 class DailyHoroscope : AppCompatActivity()
@@ -20,6 +22,11 @@ class DailyHoroscope : AppCompatActivity()
     lateinit var ivImage: ImageView
     lateinit var tvDates: TextView
     lateinit var tvDailyHoroscope: TextView
+    lateinit var horoscope: Horoscope
+    lateinit var session: SessionManager
+    lateinit var favoriteMenu: MenuItem
+    var isFavorite = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +41,24 @@ class DailyHoroscope : AppCompatActivity()
         //PERSONALIZAR EL ACTIONBAR
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_launcher_foreground)
-        supportActionBar?.setTitle("hola")
-        supportActionBar?.setSubtitle("morr - hola")
+        supportActionBar?.setTitle("JWIR")
+        supportActionBar?.setSubtitle("InRi")
 
         //ENLAZAMOS LOS ELEMENTOS CON LAS VARIABLES
         ivImage = findViewById(R.id.idIvImage)
         tvDates = findViewById(R.id.idTvDates)
         tvDailyHoroscope = findViewById(R.id.idTvDailyHoroscope)
 
+        //
+        session = SessionManager(this)
+
         //RECIBIMOS EL INTENT DEL OTRO ACTIVITY
         val id = intent.getStringExtra("HOROSCOPE_ID")!!//CON ESTOS SIGNOS !! LE DECIMOS QUE NO HABRAN NULOS
 
+        //
+        isFavorite = session.isFavorite(id)
         //VARIABLE PARA
-        val horoscope = Horoscope.getById(id)
+        horoscope = Horoscope.getById(id)
 
         //PASAMOS LOS VALORES RECIBIDOS
         ivImage.setImageResource(horoscope.icon)
@@ -56,9 +68,15 @@ class DailyHoroscope : AppCompatActivity()
     }//fin oncreate
 
     //
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
     {
         menuInflater.inflate(R.menu.activity_daily_horoscope_menu,menu)
+
+        //
+        favoriteMenu = menu.findItem(R.id.idMnFavorite)
+        setFavoriteMenu()
+
+
         return true//super.onCreateOptionsMenu(menu)
     }
 
@@ -68,7 +86,17 @@ class DailyHoroscope : AppCompatActivity()
     {
         return when (item.itemId) {
             R.id.idMnFavorite -> {
-                Toast.makeText(this,"FAVORITO", Toast.LENGTH_SHORT).show()
+                //
+                isFavorite = !isFavorite
+                if (isFavorite)
+                {
+                    session.setFavorite(horoscope.id)
+                }
+                else {
+                    session.setFavorite("")
+                }
+                setFavoriteMenu()
+                //Toast.makeText(this,"MARCADO COMO FAVORITO", Toast.LENGTH_SHORT).show()
                 true
             }
 
@@ -83,6 +111,16 @@ class DailyHoroscope : AppCompatActivity()
                 }
 
             else -> {super.onOptionsItemSelected(item)}
+        }
+    }
+
+    //
+
+    fun setFavoriteMenu() {
+        if (isFavorite) {
+            favoriteMenu.setIcon(R.drawable.ic_mn_favorite_select_24)
+        } else {
+            favoriteMenu.setIcon(R.drawable.ic_mn_favorite_24)
         }
     }
 }
