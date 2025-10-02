@@ -9,4 +9,10 @@
         android:title="@string/txt_mn_search"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <item
+        android:id="@+id/idMnViewMode"
+        android:icon="@drawable/ic_mn_grid_view_24"
+        android:title="@string/txt_mn_view_mode"
+        app:showAsAction="ifRoom" />
 </menu>

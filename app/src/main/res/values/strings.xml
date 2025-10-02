@@ -2,6 +2,7 @@
     <string name="app_name">Horóscopo - RecyclerView</string>
     <string name="txt_title_activity_main">Zodiaco</string>
 
+    <!--SIGNOS DEL ZODIACO-->
     <string name="txt_name_aries">Aries</string>
     <string name="txt_name_taurus">Tauro</string>
     <string name="txt_name_gemini">Géminis</string>
@@ -15,6 +16,7 @@
     <string name="txt_name_aquarius">Acuario</string>
     <string name="txt_name_pisces">Piscis</string>
 
+    <!--FECHAS DEL ZODIACO-->
     <string name="txt_date_aries">21 de marzo al 19 de abril</string>
     <string name="txt_date_taurus">20 de abril al 20 de mayo</string>
     <string name="txt_date_gemini">21 de mayo al 20 de junio</string>
@@ -27,7 +29,10 @@
     <string name="txt_date_capricorn">22 de diciembre al 19 de enero</string>
     <string name="txt_date_aquarius">20 de enero al 18 de febrero</string>
     <string name="txt_date_pisces">19 de febrero al 20 de marzo</string>
+
+    <!--TEXTOS DE LOS MENUS-->
     <string name="txt_mn_search">Buscar</string>
     <string name="txt_mn_favorite">Favorito</string>
     <string name="txt_mn_share">Compartir</string>
+    <string name="txt_mn_view_mode">Modo de visualización</string>
 </resources>

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo_android.R
 import com.example.horoscopo_android.adapters.HoroscopeAdapter
 import com.example.horoscopo_android.data.Horoscope
+import com.example.horoscopo_android.utils.search
 
 class MainActivity : AppCompatActivity()
 {
@@ -27,6 +28,10 @@ class MainActivity : AppCompatActivity()
 
     //VARIABLE QUE RECIBE LA LISTA CON LOS HOROSCOPOS
     var horoscopeList: List<Horoscope> = Horoscope.getAll()
+
+    //
+    var isGridViewEnabled = false
+    lateinit var viewModeMenu: MenuItem
 
     /*
     * INICIO DEL ONCREATE
@@ -41,11 +46,14 @@ class MainActivity : AppCompatActivity()
             insets
         }//INICIO ONCREATE
 
-        //CAMBIAR EL TITULO DE LA APLICACION
-        supportActionBar?.setTitle(R.string.txt_title_activity_main)
+        //ENLAZAMOS LA VARIABLE CON EL CONTROL
         rvListHoroscope = findViewById(R.id.idRvListHoroscope)
 
-        adapter = HoroscopeAdapter(horoscopeList,::onItemClickListener)
+        //CAMBIAR EL TITULO DE LA APLICACION
+        supportActionBar?.setTitle(R.string.txt_title_activity_main)
+
+        setupViewMode()
+        //adapter = HoroscopeAdapter(horoscopeList,::onItemClickListener)
         /*
         * SE PUEDE HACER USO DE LA FUNCION LAMDA DE ESTAS DOS MANERAS
         *
@@ -58,9 +66,12 @@ class MainActivity : AppCompatActivity()
             goToDetail(horoscope)
         })//IT ES POR DEFECTO DE LA FUNCION LAMDA, SE PUEDE */
 
-        rvListHoroscope.adapter = adapter
+        /*
+        * SE COMENTA ESTAS LINEAS PORQUE SE VAN A LA FUNCION SETUPVIEWMODE
+        * */
+        //rvListHoroscope.adapter = adapter
         //rvListHoroscope.layoutManager  = LinearLayoutManager(this)//, LinearLayoutManager.VERTICAL,false)
-        rvListHoroscope.layoutManager  = GridLayoutManager(this,2)
+        //rvListHoroscope.layoutManager  = GridLayoutManager(this,2)
 
     }
     /*
@@ -76,11 +87,19 @@ class MainActivity : AppCompatActivity()
     }
 
     //
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean
+
+    //override fun onCreateOptionsMenu(menu: Menu?): Boolean
+    //QUITAMOS EL SIGNO DE ? PARA INDICAR QUE SI EXISTE EL MENU
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
     {
         menuInflater.inflate(R.menu.activity_main_menu,menu)
 
-        val searchView = menu!!.findItem(R.id.idMnSearch).actionView as SearchView
+        viewModeMenu = menu.findItem(R.id.idMnViewMode)
+        setViewModeMenu()
+
+        //val searchView = menu!!.findItem(R.id.idMnSearch).actionView as SearchView
+        val searchView = menu.findItem(R.id.idMnSearch).actionView as SearchView
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
 
             //consejo : cuando esta en internet
@@ -97,8 +116,14 @@ class MainActivity : AppCompatActivity()
                 * para buscar en la lista
                 * */
                 horoscopeList = Horoscope.getAll().filter {
-                    getString(it.name).contains(newText,true) ||
-                    getString(it.dates).contains(newText,true) }
+
+                    /*getString(it.name).contains(newText,true) ||
+                    getString(it.dates).contains(newText,true)*/
+                    /*
+                    * search SE IMPORTA DE LA CLASE StringExtensions QUE ESTA EN EL PAQUETE utils
+                    * */
+                    getString(it.name).search(newText) ||
+                    getString(it.dates).search(newText) }
 
                 //LLAMAMOS A LA FUNCION updateItems DEL ADAPTADOR HOROSCOPE ADAPTER
                 adapter.updateItems(horoscopeList)
@@ -114,18 +139,45 @@ class MainActivity : AppCompatActivity()
     override fun onOptionsItemSelected(item: MenuItem): Boolean
     {
         return when (item.itemId) {
-            R.id.idMnSearch -> {
+            R.id.idMnViewMode -> {
                 //
-
-                Toast.makeText(this,"BUSCAR", Toast.LENGTH_SHORT).show()
+                isGridViewEnabled = !isGridViewEnabled
+                setupViewMode()
+                setViewModeMenu()
                 true
             }
-
             else -> {super.onOptionsItemSelected(item)}
         }
     }
 
+    //
+    private fun setupViewMode()
+    {
+        if (isGridViewEnabled)
+        {
+            adapter = HoroscopeAdapter(horoscopeList,::onItemClickListener, R.layout.item_horoscope_grid)
+            rvListHoroscope.layoutManager = GridLayoutManager(this, 2)
+        }
+        else
+        {
+            adapter = HoroscopeAdapter(horoscopeList,::onItemClickListener, R.layout.item_horoscope_list)
+            rvListHoroscope.layoutManager = LinearLayoutManager(this)
+        }
+        rvListHoroscope.adapter = adapter
+    }
 
+    //
+    private fun setViewModeMenu()
+    {
+        if (isGridViewEnabled)
+        {
+            viewModeMenu.setIcon(R.drawable.ic_mn_list_view_24)
+        }
+        else
+        {
+            viewModeMenu.setIcon(R.drawable.ic_mn_grid_view_24)
+        }
+    }
     //
     fun goToDetail(horoscope: Horoscope)
     {

@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horoscopo_android.data.Horoscope
 import com.example.horoscopo_android.R
@@ -13,7 +12,8 @@ import com.example.horoscopo_android.utils.SessionManager
 
 class HoroscopeAdapter(
     var items: List<Horoscope>,
-    val onClickListener: (Int)-> Unit
+    val onClickListener: (Int)-> Unit,
+    val layout: Int
 ) : RecyclerView.Adapter<HoroscopeViewHolder>()
 {
     /*
@@ -25,7 +25,8 @@ class HoroscopeAdapter(
     {
         //
         //val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope_list,parent,false)
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope_grid,parent,false)
+        //val view = LayoutInflater.from(parent.context).inflate(R.layout.item_horoscope_grid,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(layout,parent,false)//En esta opción se agrega el parametro layout
         return HoroscopeViewHolder(view)
     }
 
@@ -80,15 +81,6 @@ class HoroscopeViewHolder(view: View) : RecyclerView.ViewHolder(view)
         } else {
             ivItemFavorite.visibility = View.GONE
         }
-    }
 
-    //
-    init {
-        view.setOnClickListener { v: View->
-            val position: Int = layoutPosition
-            Toast.makeText(view.context,"${position} probando", Toast.LENGTH_SHORT).show()
-
-
-        }
     }
 }
