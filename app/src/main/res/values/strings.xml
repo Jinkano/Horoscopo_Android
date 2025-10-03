@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Horóscopo - RecyclerView</string>
     <string name="txt_title_activity_main">Zodiaco</string>
+    <string name="txt_title_daily_horoscope">Predicción para</string>
 
     <!--SIGNOS DEL ZODIACO-->
     <string name="txt_name_aries">Aries</string>
@@ -15,6 +16,21 @@
     <string name="txt_name_capricorn">Capricornio</string>
     <string name="txt_name_aquarius">Acuario</string>
     <string name="txt_name_pisces">Piscis</string>
+
+    <!--SIGNOS DEL ZODIACO-->
+    <string name="txt_name_img_horoscope">Imagen del horóscopo</string>
+    <string name="txt_name_img_aries">Imagen del signo Aries</string>
+    <string name="txt_name_img_taurus">Imagen del signo Tauro</string>
+    <string name="txt_name_img_gemini">Imagen del signo Géminis</string>
+    <string name="txt_name_img_cancer">Imagen del signo Cáncer</string>
+    <string name="txt_name_img_leo">Imagen del signo Leo</string>
+    <string name="txt_name_img_virgo">Imagen del signo Virgo</string>
+    <string name="txt_name_img_libra">Imagen del signo Libra</string>
+    <string name="txt_name_img_scorpio">EImagen del signo scorpio</string>
+    <string name="txt_name_img_sagittarius">SImagen del signo agitario</string>
+    <string name="txt_name_img_capricorn">Imagen del signo Capricornio</string>
+    <string name="txt_name_img_aquarius">Imagen del signo Acuario</string>
+    <string name="txt_name_img_pisces">Imagen del signo Piscis</string>
 
     <!--FECHAS DEL ZODIACO-->
     <string name="txt_date_aries">21 de marzo al 19 de abril</string>
@@ -35,4 +51,10 @@
     <string name="txt_mn_favorite">Favorito</string>
     <string name="txt_mn_share">Compartir</string>
     <string name="txt_mn_view_mode">Modo de visualización</string>
+    <string name="txt_mn_today">Diario</string>
+    <string name="txt_mn_week">Semanal</string>
+    <string name="txt_mn_month">Mensual</string>
+
+    <!---->
+    <string name="txt_consulting">Consultando con las estrellas…</string>
 </resources>

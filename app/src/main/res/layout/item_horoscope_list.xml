@@ -37,24 +37,24 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Horoscope name"
                 app:layout_constraintEnd_toStartOf="@+id/idIvItemFavorite"
                 app:layout_constraintStart_toEndOf="@+id/idIvItemImage"
-                app:layout_constraintTop_toTopOf="@+id/idIvItemImage" />
+                app:layout_constraintTop_toTopOf="@+id/idIvItemImage"
+                tools:text="idTvItemName - NOMBRE DEL HORÓSCOPO" />
 
             <TextView
                 android:id="@+id/idTvItemDates"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="Horoscope dates"
                 app:layout_constraintBottom_toBottomOf="@+id/idIvItemImage"
                 app:layout_constraintEnd_toStartOf="@+id/idIvItemFavorite"
-                app:layout_constraintStart_toEndOf="@+id/idIvItemImage" />
+                app:layout_constraintStart_toEndOf="@+id/idIvItemImage"
+                app:layout_constraintTop_toBottomOf="@+id/idTvItemName"
+                tools:text="idTvItemDates - FECHAS DEL HORÓSCOPO" />
 
             <ImageView
                 android:id="@+id/idIvItemFavorite"

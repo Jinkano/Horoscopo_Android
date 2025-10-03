@@ -15,6 +15,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/txt_name_img_horoscope"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,22 +28,33 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="RANGO DE FECHA DEL SIGNO"
+        tools:text="RANGO DE FECHA DEL SIGNO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idIvImage" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/idLpiDailyHoroscope"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:indeterminate="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idTvDates" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/idBnvDailyHoroscope"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idTvDates">
+        app:layout_constraintTop_toBottomOf="@+id/idLpiDailyHoroscope">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,9 +64,17 @@
                 android:id="@+id/idTvDailyHoroscope"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SE LLENA CON EL HOROSCOPO DEL DÍA" />
+                tools:text="SE LLENA CON EL HOROSCOPO DEL DÍA" />
         </RelativeLayout>
-
     </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/idBnvDailyHoroscope"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/activity_daily_horoscope_bottomnavigationview_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

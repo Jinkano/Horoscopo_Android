@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/idMnToday"
+        android:icon="@drawable/ic_mn_today_24"
+        android:title="@string/txt_mn_today"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/idMnWeek"
+        android:icon="@drawable/ic_mn_week_24"
+        android:title="@string/txt_mn_week"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/idMnMonth"
+        android:icon="@drawable/ic_mn_month_24"
+        android:title="@string/txt_mn_month"
+        app:showAsAction="always"/>
+
+</menu>

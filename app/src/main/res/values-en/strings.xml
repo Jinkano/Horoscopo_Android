@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Horoscope - RecyclerView</string>
     <string name="txt_title_activity_main">Zodiac</string>
+    <string name="txt_title_daily_horoscope">Prediction for</string>
 
     <string name="txt_name_cancer">Cancer</string>
     <string name="txt_name_leo">Leo</string>
@@ -16,6 +17,19 @@
     <string name="txt_name_gemini">Gemini</string>
     <string name="txt_name_capricorn">Capricorn</string>
 
+    <string name="txt_name_img_horoscope">Horoscope image</string>
+    <string name="txt_name_img_aries">Image of the Aries sign</string>
+    <string name="txt_name_img_taurus">Image of the Taurus sign</string>
+    <string name="txt_name_img_gemini">Image of the Gemini sign</string>
+    <string name="txt_name_img_cancer">Image of the Cancer sign</string>
+    <string name="txt_name_img_leo">Image of the Leo sign</string>
+    <string name="txt_name_img_virgo">Image of the Virgo sign</string>
+    <string name="txt_name_img_libra">Image of the Libra sign</string>
+    <string name="txt_name_img_scorpio">Image of the Scorpio sign</string>
+    <string name="txt_name_img_sagittarius">Image of the Sagittarius sign</string>
+    <string name="txt_name_img_capricorn">Image of the Capricorn sign</string>
+    <string name="txt_name_img_aquarius">Image of the Aquarius sign</string>
+
     <string name="txt_date_virgo">August 23 to September 22</string>
     <string name="txt_date_libra">September 23 to October 22</string>
     <string name="txt_date_scorpio">October 23 to November 21</string>
@@ -25,11 +39,18 @@
     <string name="txt_date_capricorn">December 22 to January 19</string>
     <string name="txt_date_taurus">April 20 to May 20</string>
     <string name="txt_date_gemini">May 21 to June 20</string>
+    <string name="txt_name_img_pisces">Image of the Pisces sign</string>
     <string name="txt_date_aries">March 21 to April 19</string>
     <string name="txt_date_aquarius">January 20 to February 18</string>
     <string name="txt_date_pisces">February 19 to March 20</string>
+
     <string name="txt_mn_search">Search</string>
     <string name="txt_mn_favorite">Favorite</string>
     <string name="txt_mn_share">Share</string>
     <string name="txt_mn_view_mode">View mode</string>
+    <string name="txt_mn_today">Daily</string>
+    <string name="txt_mn_week">Weekly</string>
+    <string name="txt_mn_month">Monthly</string>
+
+    <string name="txt_consulting">Consulting the stars…</string>
 </resources>
